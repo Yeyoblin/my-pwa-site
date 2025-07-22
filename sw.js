@@ -10,7 +10,7 @@ const urlsToCache = [
   '/submit_form.php',
   '/icon-192x192.png',
   '/icon-512x512.png',
-
+  '/images/'
 ];
 
 self.addEventListener('install', (event) => {
