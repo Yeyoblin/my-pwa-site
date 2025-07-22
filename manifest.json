@@ -2,7 +2,7 @@
   "name": "Моё PWA",
   "short_name": "PWA",
   "description": "Моё первое PWA-приложение",
-  "start_url": "/",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
