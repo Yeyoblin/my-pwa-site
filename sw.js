@@ -8,8 +8,8 @@ const urlsToCache = [
   '/contacts.html',
   '/outdoor.html',
   '/submit_form.php',
-  '/icon-192x192.png',
-  '/icon-512x512.png',
+  '/site1.png',
+  '/site2.png',
   '/images/'
 ];
 
