@@ -1,8 +1,8 @@
 {
-  "name": "Моё PWA",
-  "short_name": "PWA",
-  "description": "Моё первое PWA-приложение",
-  "start_url": "/index.html",
+  "name": "the sims 4",
+  "short_name": "the sims",
+  "description": "Моё PWA-приложение",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
