@@ -4,6 +4,7 @@ const BASE_PATH = ''; // Убедитесь, что путь правильны�
 const urlsToCache = [
   BASE_PATH + '/',
   BASE_PATH + '/index.html',
+  BASE_PATH + '/manifest.json',
   BASE_PATH + '/style.css',
   BASE_PATH + '/fairies.html',
   BASE_PATH + '/herbalism.html',
