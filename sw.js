@@ -1,5 +1,5 @@
 const CACHE_NAME = 'my-pwa-cache-v3';
-const BASE_PATH = '/my-pwa-site';
+const BASE_PATH = ''; // Убедитесь, что путь правильный
 
 const urlsToCache = [
   BASE_PATH + '/',
@@ -9,18 +9,23 @@ const urlsToCache = [
   BASE_PATH + '/herbalism.html',
   BASE_PATH + '/contacts.html',
   BASE_PATH + '/outdoor.html',
-  BASE_PATH + '/submit_form.php',
   BASE_PATH + '/site1.png',
   BASE_PATH + '/site2.png'
-  // Добавьте сюда нужные изображения из /images/ по аналогии:
-  // BASE_PATH + '/images/example.png'
+  // Добавьте другие ресурсы по мере необходимости
 ];
 
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => cache.addAll(urlsToCache))
+      .then(() => self.skipWaiting())
       .catch(err => console.error('Ошибка кэширования в install:', err))
+  );
+});
+
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    self.clients.claim()
   );
 });
 
@@ -29,19 +34,25 @@ self.addEventListener('fetch', event => {
     caches.match(event.request)
       .then(cachedResponse => {
         if (cachedResponse) return cachedResponse;
-        return fetch(event.request).then(networkResponse => {
-          // Проверяем валидность ответа
-          if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
+
+        return fetch(event.request)
+          .then(networkResponse => {
+            // Проверяем, можно ли кэшировать ответ
+            if (!networkResponse  networkResponse.status !== 200  networkResponse.type !== 'basic') {
+              return networkResponse;
+            }
+
+            const responseClone = networkResponse.clone();
+            caches.open(CACHE_NAME)
+              .then(cache => cache.put(event.request, responseClone))
+              .catch(err => console.error('Ошибка сохранения в кэш:', err));
+
             return networkResponse;
-          }
-          const responseClone = networkResponse.clone();
-          caches.open(CACHE_NAME).then(cache => {
-            cache.put(event.request, responseClone);
+          })
+          .catch(() => {
+            // Опционально: оффлайн-страница
+            return caches.match('/offline.html') || new Response('Нет подключения к интернету');
           });
-          return networkResponse;
-        });
-      }).catch(() => {
-        // Здесь можно вернуть заглушку офлайн-страницы, если есть
       })
   );
 });
