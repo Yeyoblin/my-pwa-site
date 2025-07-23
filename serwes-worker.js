@@ -9,8 +9,8 @@ const urlsToCache = [
   BASE_PATH + '/herbalism.html',
   BASE_PATH + '/contacts.html',
   BASE_PATH + '/outdoor.html',
-  BASE_PATH + '/icon-192.png',
-  BASE_PATH + '/icon-512.png'
+  BASE_PATH + '/icon-192x192.png',
+  BASE_PATH + '/icon-512x512.png'
   // Добавьте другие ресурсы по мере необходимости
 ];
 
